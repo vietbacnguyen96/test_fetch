@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h1>JavaScript Fetch API</h1>
+  <h2>The fetch() Method</h2>
+  <p id="demo">Fetch a file to change this text.</p>
+
+  <script>
+    var myText = ""
+
+    var path = ["0", "1", "data", "2", "3"]
+    async function getMultipleText() {
+      for (i = 1; i < 5; i++) {
+        await getText(`${path[i]}.txt`);
+      }
+    }
+
+      getMultipleText().then(() => { document.getElementById("demo").innerHTML = myText; }
+    )
+
+
+    async function getText(file) {
+      let myObject = await fetch(file);
+      console.log(myObject.status)
+      if (myObject.status == 404) {
+        myText += "không có "
+      }
+      else {
+        myText += await myObject.text();
+      }
+    }
+  </script>
+
+</body>
+
+</html>
